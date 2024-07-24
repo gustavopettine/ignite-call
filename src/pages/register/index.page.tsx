@@ -5,6 +5,7 @@ import { ArrowRight } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { AxiosError } from 'axios'
 import { api } from '@/lib/axios'
 
 import { Container, Form, FormError, Header } from '@/pages/register/styles'
@@ -49,7 +50,12 @@ export default function Register() {
         username: data.username,
       })
     } catch (err) {
-      console.log(err)
+      if (err instanceof AxiosError && err?.response?.data?.message) {
+        alert(err.response.data.message)
+        return
+      }
+
+      console.error(err)
     }
   }
 
