@@ -12,7 +12,9 @@ import {
 } from '@/pages/schedule/[username]/ScheduleForm/ConfirmStep/styles'
 
 const confirmFormSchema = z.object({
-  name: z.string().min(3, { message: 'The name must have at least 3 characters.' }),
+  name: z
+    .string()
+    .min(3, { message: 'The name must have at least 3 characters.' }),
   email: z.string().email({ message: 'Enter a valid e-mail address.' }),
   observations: z.string().nullable(),
 })
